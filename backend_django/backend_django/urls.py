@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from backendapp.views import * 
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^articles/$', ArticleList.as_view(), name='article_list'),
+    url(r'^article/(?P<pk>\d+)$', ArticleDetail.as_view(), name='article_detail')
 ]

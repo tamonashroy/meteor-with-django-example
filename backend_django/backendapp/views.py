@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from restless.modelviews import ListEndpoint, DetailEndpoint
+from backendapp.models import Article
 
-# Create your views here.
+class ArticleList(ListEndpoint):
+    model = Article
+
+class ArticleDetail(DetailEndpoint):
+    model = Article
