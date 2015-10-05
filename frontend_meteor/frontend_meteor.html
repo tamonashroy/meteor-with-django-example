@@ -3,12 +3,63 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="mainLayout">
+  <div class="container-fixed">
+  <div class="row row-xs-9">
+    <div class="col col-xs-2">
+	<ul>
+                <li class="sidebar-brand">
+                    <a href="#"> 
+                        Meteor Frontend Demo
+                    </a>
+                </li>
+		<li>
+
+			
+<span class="glyphicon glyphicon-align-justify"></span> | <span class="glyphicon glyphicon-search"></span>
+
+
+		</li>
+                <li>
+                    <a href="#"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="100" height="80"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="fruit1.jpg" class="img-rounded" alt="Cinque Terre" width="100" height="80"></a>
+                </li>
+		<li>
+                    <a href="#"><img src="bird1.jpeg" class="img-rounded" alt="Cinque Terre" width="100" height="80"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="road.jpg" class="img-rounded" alt="Cinque Terre" width="100" height="80"></a>
+                </li>
+                
+            </ul>
+    </div>
+    <div class="col col-xs-10">{{>Template.dynamic template=content}} </div>
+  </div>
+  <div class="row row-xs-10">
+    <div class="col col-xs-12">What to read next?
+ <div class="row">
+  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title1</p></div>
+  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title2</p></div>
+  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title3</p></div>
+  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title4</p></div>
+</div>
+</div>
+  </div>
+</div>
+</template>
+<template name="blogHome">
+  <p>This is the home page of our blog</p>
+    <p>
+        <a href="/hello-world">See Hello World Post</a>
+    </p>
+</template>
+<template name="blogPost">
+  <p>
+      <a href="/">Back</a> <br/>
+          This is a single blog post
+  </p>
 </template>
