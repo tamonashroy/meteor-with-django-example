@@ -11,7 +11,7 @@
     <div class="col col-xs-2">
 	<ul>
                 <li class="sidebar-brand">
-                    <a href="#"> 
+                    <a href="/"> 
                         Meteor Frontend Demo
                     </a>
                 </li>
@@ -41,25 +41,55 @@
   </div>
   <div class="row row-xs-10">
     <div class="col col-xs-12">What to read next?
- <div class="row">
-  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title1</p></div>
-  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title2</p></div>
-  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title3</p></div>
-  <div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>title4</p></div>
-</div>
-</div>
+	    {{> WhatToReadNext}}
+    </div>
   </div>
 </div>
-</template>
-<template name="blogHome">
-  <p>This is the home page of our blog</p>
-    <p>
-        <a href="/hello-world">See Hello World Post</a>
-    </p>
 </template>
 <template name="blogPost">
   <p>
       <a href="/">Back</a> <br/>
           This is a single blog post
   </p>
+</template>
+<template name="DetailPage">
+	<h1>{{article.title}}</h1>
+	<p>{{article.publication_date}}</p>
+	<div class="post">
+		<div class="hero-image">
+			{{article.hero_image}}
+		</div>
+		{{article.body_text}}
+	</div>
+</template>
+<template name="WhatToReadNext">
+<div class="row">
+	{{#each articles}}
+		{{> wtrn}}
+	{{/each}}
+</div>
+</template>
+<template name="wtrn">
+<div class="col-sm-3"><img src="flower1.jpg" class="img-rounded" alt="Cinque Terre" width="150" height="120"> <p>{{title}}</p></div>
+</template>
+
+<template name="ArticleList">
+	<h1>{{article.title}}</h1>
+	<p>{{article.publication_date}}</p>
+	<div class="post">
+		<div class="hero-image">
+			{{article.hero_image}}
+		</div>
+		{{article.body_text}}
+	</div>
+	<div class="all-post">
+		<ul>
+			{{#each articles}}
+			{{> ulpost}}
+			{{/each}}
+		</ul>
+	</div>
+</template>
+<template name="ulpost">
+<li><a href="/article/{{articleid}}">{{title}}</a></li>
 </template>
