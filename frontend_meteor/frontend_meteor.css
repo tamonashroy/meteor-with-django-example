@@ -30,3 +30,8 @@
                 text-align: center;
 }
 .hero-image {float: right;}
+h1 { font-size: 2rem; line-height: 1.125; color: #1E1E1E; font-weight: bold; font-family: Helmet,Freesans,Helvetica,Arial,sans-serif}
+h3 { font-size: 1.6rem; line-height: 1.125; color: #1E1E1E; font-weight: bold; font-family: Helmet,Freesans,Helvetica,Arial,sans-serif}
+.post  { text-align: left; }
+.row {text-align: left; }
+ul { list-style-type: none; }

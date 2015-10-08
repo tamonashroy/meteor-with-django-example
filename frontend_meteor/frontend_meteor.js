@@ -30,11 +30,15 @@ if (Meteor.isClient) {
 	article: function() {
 		var data = Article.findOne({id: 1});
                 var last_index = data.hero_image.length
-                data.hero_image =  "http://tamonashroy.pythonanywhere.com/media" + data.hero_image.slice(1,last_index)
+                data.hero_image =  "http://tamonashroy.pythonanywhere.com/media" + data.hero_image.slice(1,last_index) //correcting url
+                data.body_text = data.body_text.slice(0,1000); //slice for preview
 		return data;
 	},
 	articles: function() {
-		var data = Article.find({});
+		var data = Article.find({}).fetch();
+                for (i=0; i<data.length; i++) {
+                    data[i].body_text = data[0].body_text.slice(0,500); //slice for the list
+                }
 		return data;
 	}  
    });
