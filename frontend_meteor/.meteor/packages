@@ -21,3 +21,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 kadira:flow-router
 kadira:blaze-layout
 twbs:bootstrap
+http

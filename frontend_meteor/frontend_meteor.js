@@ -62,6 +62,13 @@ if (Meteor.isClient) {
 		}
 	   },
 	   'click #prev': function(event){
+                   Meteor.call('logme', function(err, res){ 
+                       if (err) {
+                        console.log("err"+err);
+                        }
+                       else {
+                        console.log(res);
+                    }});
 		   console.log("Click event in next happened");
 		   var pageInfoDoc = Article.findOne({'doc':1});
 		   Session.set('page', pageInfoDoc._id)
@@ -72,21 +79,20 @@ if (Meteor.isClient) {
 		}
 	   }
    });
-   
+  Meteor.methods({
+        log1:function() {console.log("log45");}
+		
+        }); 
 }
-if (Meteor.is_server) {
+if (Meteor.isServer) {
 	Meteor.startup(function() {
 	Meteor.methods({
-		'logme': function() {
-			console.log("Logme cakked");
-		},
-		'fetchFromService': function() {
-			var url = "http://tamonashroy.pythonanywhere.com/articles";
-			//synchronous GET
-			var result = Meteor.http.get(url, {timeout:30000});
-			if(result.statusCode==200) {
-				var respJson = JSON.parse(result.content);
-				console.log("response received.");
+		'fetch': function() {
+		   var url = "http://tamonashroy.pythonanywhere.com/articles";
+                   var res = HTTP.get(url);
+                   var w = res.content;
+                   var respJson = JSON.parse(w);
+		   console.log("response received.");
 				for (i=0; i<respJson.length; i++){
 					var temp = respJson[i].id;
 					if (!Article.findOne({'id': temp})) {
@@ -94,21 +100,17 @@ if (Meteor.is_server) {
 					}
 
 				}
-				return respJson;
-			} else {
-				console.log("Response issue: ", result.statusCode);
-				var errorJson = JSON.parse(result.content);
-				throw new Meteor.Error(result.statusCode, errorJson.error);
-			}
 		},
-		'startPolling': function(seconds){
+		startPolling: function(seconds){
         		pollingTaskID = Meteor.setInterval(function(){
-            		Meteor.call('fetchFromService');
+            		Meteor.call('fetch');
         		}, seconds*1000);
         		return "polling started...";
     		}
 		
 	});
+        Meteor.call('startPolling', 30);
+
 });
 }
 
