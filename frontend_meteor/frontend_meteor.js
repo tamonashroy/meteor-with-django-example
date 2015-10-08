@@ -96,6 +96,10 @@ if (Meteor.isServer) {
 		
 	});
         Meteor.call('startPolling', 30);
+        var pageinfo = Article.findOne({doc:1});
+        if (!pageinfo) {
+            Article.insert({doc:1, pageno:0});
+        }
 
 });
 }
