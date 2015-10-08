@@ -14,7 +14,7 @@ if (Meteor.isClient) {
    Template.DetailPage.helpers({
 	article: function() {
 		var articleid = FlowRouter.getParam("articleid");
-		var data = Article.findOne({articleid: parseInt(articleid)});
+		var data = Article.findOne({id: parseInt(articleid)});
 		return data;
 	}
    });
@@ -26,18 +26,11 @@ if (Meteor.isClient) {
 		return items;
 	}
    });
-   /*Template.WhatToReadNext.onRendered(function() {
-	// This is run once and set the page no to 0. This value is used to determine 
-	// which block of 4 set to show in the what to read next section.
-	//Article.update({'doc':1}, {$set:{'pageno':0}});
-	console.log(Article.findOne({doc:1}));
-	var a=Article.findOne({doc:1});
-	Session.set('page', a._id);
-	console.log("set pageno session"+session.get('page'));
-   });*/
    Template.ArticleList.helpers({
 	article: function() {
-		var data = Article.findOne({articleid: 1});
+		var data = Article.findOne({id: 1});
+                var last_index = data.hero_image.length
+                data.hero_image =  "http://tamonashroy.pythonanywhere.com/media" + data.hero_image.slice(1,last_index)
 		return data;
 	},
 	articles: function() {
@@ -62,13 +55,6 @@ if (Meteor.isClient) {
 		}
 	   },
 	   'click #prev': function(event){
-                   Meteor.call('logme', function(err, res){ 
-                       if (err) {
-                        console.log("err"+err);
-                        }
-                       else {
-                        console.log(res);
-                    }});
 		   console.log("Click event in next happened");
 		   var pageInfoDoc = Article.findOne({'doc':1});
 		   Session.set('page', pageInfoDoc._id)
@@ -79,10 +65,6 @@ if (Meteor.isClient) {
 		}
 	   }
    });
-  Meteor.methods({
-        log1:function() {console.log("log45");}
-		
-        }); 
 }
 if (Meteor.isServer) {
 	Meteor.startup(function() {
